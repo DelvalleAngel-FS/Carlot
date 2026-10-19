@@ -1,7 +1,8 @@
 import "react";
 import "./App.css";
 import API from "./API";
-import SearchBar from "./components/SearchBar";
+import PostApi from "./API/PostAPI";
+import { MantineProvider } from "@mantine/core";
 
 function App() {
   const handleSearch = async (event) => {
@@ -13,7 +14,8 @@ function App() {
   return (
     <>
       <h1>Carlot Search</h1>
-      <SearchBar onSubmit={handleSearch} />
+      {/* <SearchBar onSubmit={handleSearch} /> */}
+      <PostApi />
     </>
   );
 }
