@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/DelvalleAngel-FS/Project-Mod-2#readme",
   "dependencies": {
+    "cors": "^2.8.6",
     "dotenv": "^18.0.5",
     "express": "^5.2.1",
     "mongodb": "7.7",
