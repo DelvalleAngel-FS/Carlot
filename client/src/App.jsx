@@ -1,20 +1,13 @@
 import "react";
 import "./App.css";
-import API from "./API";
-import PostApi from "./API/PostAPI";
+import PostApi from "./components/PostAPI";
 import { MantineProvider } from "@mantine/core";
 
 function App() {
-  const handleSearch = async (event) => {
-    event.preventDefault();
-    console.log("Search button clicked!", event.target.search.value);
-    const response = await API.fetchCars();
-    console.log(response);
-  };
   return (
     <>
-      <h1>Carlot Search</h1>
-      {/* <SearchBar onSubmit={handleSearch} /> */}
+      <h1>Post</h1>
+
       <PostApi />
     </>
   );
