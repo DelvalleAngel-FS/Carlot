@@ -46,8 +46,8 @@ const getCarById = async (req, res) => {
       success: true,
       message: `${req.method}- request to Car endpoint`,
     });
-  } catch ({ nessage }) {
-    res.status(500).json({
+  } catch ({ message }) {
+    res.status(400).json({
       success: false,
       message,
     });
@@ -57,18 +57,42 @@ const getCarById = async (req, res) => {
 const createCars = async (req, res) => {
   try {
     const { car } = req.body;
-    const user = await Manufacturer.findById(car.manufacturer);
-    car.manufacturer = user;
+
+    // 1. Check if the 'car' object or the 'manufacturer' ID exists in the request body
+    if (!car || !car.manufacturer) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Bad Request: Please provide car details including a 'manufacturer' ID.",
+      });
+    }
+
+    // 2. Fetch the manufacturer using the correct model
+    const manufacturer = await Manufacturer.findById(car.manufacturer);
+
+    // 3. FIX: Stop execution if the manufacturer is not found in the database
+    if (!manufacturer) {
+      return res.status(404).json({
+        success: false,
+        message:
+          "Manufacturer not found. Please provide a valid manufacturer ID.",
+      });
+    }
+
+    // 4. Create the new Car document instance
     const carData = new Car(car);
-    user.cars.push(carData._id);
-    //saves the car and user data
-    const queries = [carData.save(), user.save()];
+
+    // 5. Push the car's ID to the manufacturer's internal list safely
+    manufacturer.cars.push(carData._id);
+
+    // 6. Save both documents to the database concurrently
+    const queries = [carData.save(), manufacturer.save()];
     await Promise.all(queries);
-    // console.log("data >>>", newCar);
-    res.status(200).json({
+
+    res.status(201).json({
       data: carData,
       success: true,
-      message: `${req.method}- request to Manufacturer endpoint`,
+      message: `${req.method}- request to Car endpoint`,
     });
   } catch ({ message }) {
     res.status(500).json({

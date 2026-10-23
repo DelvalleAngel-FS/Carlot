@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function CarBlogDashboardCustomStyles() {
+export default function CarBlogDashboard() {
   // --- STATE MANAGEMENT ---
   const [manufacturers, setManufacturers] = useState([]);
   const [carList, setCarList] = useState([]);
@@ -55,6 +55,7 @@ export default function CarBlogDashboardCustomStyles() {
   };
 
   // --- SUBMIT (CREATE / UPDATE) ---
+
   const handleCarSubmission = (e) => {
     e.preventDefault();
 
@@ -63,15 +64,21 @@ export default function CarBlogDashboardCustomStyles() {
       ? `http://localhost:5000/api/v1/car/${editingId}`
       : "http://localhost:5000/api/v1/car";
 
+    // 1. Put the form fields together into an individual object
+    const carData = {
+      make,
+      model,
+      year,
+      manufacturer: selectedManufacturer,
+    };
+
+    // 2. Wrap it inside a "car" key for POST requests so your backend can read it
+    const payload = isEditing ? carData : { car: carData };
+
     fetch(url, {
       method: isEditing ? "PUT" : "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        make,
-        model,
-        year,
-        manufacturer: selectedManufacturer,
-      }),
+      body: JSON.stringify(payload), // Send the wrapped payload here
     })
       .then((res) => res.json())
       .then((result) => {
@@ -82,21 +89,6 @@ export default function CarBlogDashboardCustomStyles() {
         }
       })
       .catch((err) => console.error("Submission error:", err));
-  };
-
-  // --- ACTION: DELETE ---
-  const handleCarDeletion = (carId) => {
-    if (editingId === carId) resetFormState();
-
-    fetch(`http://localhost:5000/api/v1/car/${carId}`, { method: "DELETE" })
-      .then((res) => res.json())
-      .then((result) => {
-        setLastServerResponse(result);
-        if (result.success) {
-          setCarList((prevList) => prevList.filter((car) => car._id !== carId));
-        }
-      })
-      .catch((err) => console.error("Deletion error:", err));
   };
 
   // --- BASE LAYOUT CSS-IN-JS OBJECTS (Replace these with your CSS classes) ---

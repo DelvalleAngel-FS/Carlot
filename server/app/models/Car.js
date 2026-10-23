@@ -9,6 +9,7 @@ const carsSchema = new mongoose.Schema({
   manufacturer: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Manufacturer",
+    required: [true, "A car must have a manufacturer."],
   },
 });
 
