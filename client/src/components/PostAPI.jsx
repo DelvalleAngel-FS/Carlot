@@ -9,7 +9,7 @@ export default function CarBlogDashboard() {
   // Form Fields
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
-  const [year, setYear] = useState(2026);
+  const [year, setYear] = useState("");
   const [selectedManufacturer, setSelectedManufacturer] = useState("");
 
   // Edit Mode State
@@ -50,7 +50,7 @@ export default function CarBlogDashboard() {
     setEditingId(null);
     setMake("");
     setModel("");
-    setYear(2026);
+    setYear("");
     setSelectedManufacturer("");
   };
 
@@ -72,7 +72,7 @@ export default function CarBlogDashboard() {
       manufacturer: selectedManufacturer,
     };
 
-    // 2. Wrap it inside a "car" key for POST requests so your backend can read it
+    // 2. Wrap it inside a "car" key for POST requests so backend can read it
     const payload = isEditing ? carData : { car: carData };
 
     fetch(url, {
@@ -89,81 +89,6 @@ export default function CarBlogDashboard() {
         }
       })
       .catch((err) => console.error("Submission error:", err));
-  };
-
-  // --- BASE LAYOUT CSS-IN-JS OBJECTS (Replace these with your CSS classes) ---
-  const styles = {
-    container: {
-      maxWidth: "1300px",
-      margin: "0 auto",
-      padding: "20px",
-      fontFamily: "sans",
-    },
-    layoutGrid: {
-      display: "flex",
-      flexDirection: "column",
-      gap: "30px",
-    },
-    formWrapper: {
-      border: "4px solid #transparent",
-      boxShadow: "6px 3px 13px rgba(55, 91, 235, 0.57)",
-      padding: "20px",
-      borderRadius: "8px",
-      background: "#f9f1f1ff",
-    },
-    formGroup: {
-      marginBottom: "15px",
-      display: "flex",
-      flexDirection: "column",
-    },
-    label: { marginBottom: "5px", fontWeight: "bold", fontSize: "20px" },
-    input: {
-      padding: "8px",
-      borderRadius: "4px",
-      border: "1px solid #2a070780",
-    },
-    button: {
-      padding: "10px",
-      background: "#184170ff",
-      color: "#fff",
-      border: "none",
-      borderRadius: "4px",
-      cursor: "pointer",
-    },
-    cancelBtn: {
-      padding: "4px 8px",
-      background: "#6c757d",
-      color: "#fff",
-      border: "none",
-      borderRadius: "4px",
-      cursor: "pointer",
-    },
-    card: {
-      border: "2px solid #transparent",
-      boxShadow: "6px 3px 13px rgba(55, 91, 235, 0.57)",
-      padding: "15px",
-      borderRadius: "8px",
-      marginBottom: "15px",
-      background: "#f9f1f1ff",
-      position: "relative",
-    },
-    cardEditing: { border: "2px solid #ff9800" },
-    dossier: {
-      background: "#eaeaea",
-      padding: "10px",
-      borderRadius: "4px",
-      marginTop: "10px",
-      fontSize: "13px",
-    },
-    actionRow: { marginTop: "10px", display: "flex", gap: "10px" },
-    logWrapper: {
-      marginTop: "20px",
-      padding: "15px",
-      background: "#222",
-      color: "#00ff00",
-      borderRadius: "6px",
-      overflowX: "auto",
-    },
   };
 
   return (
@@ -223,7 +148,7 @@ export default function CarBlogDashboard() {
                   type="number"
                   style={styles.input}
                   value={year}
-                  onChange={(e) => setYear(parseInt(e.target.value) || 2026)}
+                  onChange={(e) => setYear(parseInt(e.target.value))}
                   required
                 />
               </div>
@@ -267,7 +192,13 @@ export default function CarBlogDashboard() {
                 {JSON.stringify(lastServerResponse, null, 2)}
               </pre>
             ) : (
-              <span style={{ fontStyle: "italic", color: "#888" }}>
+              <span
+                style={{
+                  fontStyle: "italic",
+                  color: "#888",
+                  fontFamily: "ui-rounded",
+                }}
+              >
                 No API activity tracked yet.
               </span>
             )}
@@ -318,3 +249,76 @@ export default function CarBlogDashboard() {
     </div>
   );
 }
+
+// --- BASE LAYOUT CSS-IN-JS OBJECTS ---
+const styles = {
+  container: {
+    maxWidth: "1300px",
+    margin: "0 auto",
+    padding: "20px",
+    fontFamily: "sans",
+  },
+  layoutFlex: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  formWrapper: {
+    border: "4px solid #transparent",
+    boxShadow: "6px 3px 13px rgba(55, 91, 235, 0.57)",
+    padding: "30px",
+    borderRadius: "8px",
+    background: "#f9f1f1ff",
+  },
+  formGroup: {
+    marginBottom: "1px",
+    display: "flex",
+    flexDirection: "column",
+  },
+  label: { marginBottom: "5px", fontWeight: "bold", fontSize: "20px" },
+  input: {
+    padding: "8px",
+    borderRadius: "4px",
+    border: "1px solid #2a070780",
+  },
+  button: {
+    padding: "10px",
+    background: "#184170ff",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
+  cancelBtn: {
+    padding: "4px 8px",
+    background: "#6c757d",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
+  card: {
+    border: "2px solid #transparent",
+    boxShadow: "6px 3px 13px rgba(55, 91, 235, 0.57)",
+    padding: "15px",
+    borderRadius: "8px",
+    marginBottom: "15px",
+    background: "#f9f1f1ff",
+    position: "relative",
+  },
+  cardEditing: { border: "2px solid #ff9800" },
+  dossier: {
+    background: "#eaeaea",
+    padding: "10px",
+    borderRadius: "4px",
+    marginTop: "10px",
+    fontSize: "13px",
+  },
+  actionRow: { marginTop: "10px", display: "flex", gap: "10px" },
+  logWrapper: {
+    marginTop: "20px",
+    padding: "15px",
+    background: "#222",
+    color: "#00ff00",
+    borderRadius: "6px",
+  },
+};
