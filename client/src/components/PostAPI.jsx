@@ -177,7 +177,7 @@ export default function CarBlogDashboard() {
             <div
               style={{
                 display: "flex",
-                justifyContent: "space-between",
+                justifyContent: "space-evenly",
                 alignItems: "center",
                 marginBottom: "15px",
               }}
@@ -274,7 +274,6 @@ export default function CarBlogDashboard() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: BLOG POST FEED */}
         <div>
           <h2>Latest Showroom Entries ({carList.length})</h2>
           {carList.length === 0 ? (
@@ -295,20 +294,6 @@ export default function CarBlogDashboard() {
                     Database ID: {car._id}
                   </small>
 
-                  {/* Populated Relationship Presentation */}
-                  {car.manufacturer && typeof car.manufacturer === "object" ? (
-                    <div style={styles.dossier}>
-                      <strong>🏢 Manufacturer Dossier:</strong>
-                      <div>Name: {car.manufacturer.name}</div>
-                      <div>HQ: {car.manufacturer.location}</div>
-                      <div>Established: {car.manufacturer.establishedYear}</div>
-                    </div>
-                  ) : (
-                    <p style={{ color: "red", fontStyle: "italic" }}>
-                      No manufacturer linked.
-                    </p>
-                  )}
-
                   {/* ACTION CONTROLLERS */}
                   <div style={styles.actionRow}>
                     <button
@@ -322,18 +307,6 @@ export default function CarBlogDashboard() {
                       onClick={() => startEditing(car)}
                     >
                       Edit
-                    </button>
-                    <button
-                      type="button"
-                      style={{
-                        ...styles.button,
-                        background: "#dc3545",
-                        padding: "5px 10px",
-                        fontSize: "12px",
-                      }}
-                      onClick={() => handleCarDeletion(car._id)}
-                    >
-                      Delete
                     </button>
                   </div>
                 </div>
