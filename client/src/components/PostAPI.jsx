@@ -26,7 +26,7 @@ export default function CarBlogDashboard() {
   };
 
   useEffect(() => {
-    // Fetch Manufacturers for vanilla <select> dropdown setup
+    // Fetch Manufacturers for dropdown setup
     fetch("http://localhost:5000/api/v1/manufacturer?limit=9")
       .then((res) => res.json())
       .then((resData) => {
@@ -94,32 +94,37 @@ export default function CarBlogDashboard() {
   // --- BASE LAYOUT CSS-IN-JS OBJECTS (Replace these with your CSS classes) ---
   const styles = {
     container: {
-      maxWidth: "1200px",
+      maxWidth: "1300px",
       margin: "0 auto",
       padding: "20px",
-      fontFamily: "sans-serif",
+      fontFamily: "sans",
     },
     layoutGrid: {
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr",
+      display: "flex",
+      flexDirection: "column",
       gap: "30px",
     },
     formWrapper: {
-      border: "1px solid #ccc",
+      border: "4px solid #transparent",
+      boxShadow: "6px 3px 13px rgba(55, 91, 235, 0.57)",
       padding: "20px",
       borderRadius: "8px",
-      background: "#fff",
+      background: "#f9f1f1ff",
     },
     formGroup: {
       marginBottom: "15px",
       display: "flex",
       flexDirection: "column",
     },
-    label: { marginBottom: "5px", fontWeight: "bold", fontSize: "14px" },
-    input: { padding: "8px", borderRadius: "4px", border: "1px solid #ccc" },
+    label: { marginBottom: "5px", fontWeight: "bold", fontSize: "20px" },
+    input: {
+      padding: "8px",
+      borderRadius: "4px",
+      border: "1px solid #2a070780",
+    },
     button: {
       padding: "10px",
-      background: "#007bff",
+      background: "#184170ff",
       color: "#fff",
       border: "none",
       borderRadius: "4px",
@@ -134,11 +139,12 @@ export default function CarBlogDashboard() {
       cursor: "pointer",
     },
     card: {
-      border: "1px solid #ddd",
+      border: "2px solid #transparent",
+      boxShadow: "6px 3px 13px rgba(55, 91, 235, 0.57)",
       padding: "15px",
       borderRadius: "8px",
       marginBottom: "15px",
-      background: "#fafafa",
+      background: "#f9f1f1ff",
       position: "relative",
     },
     cardEditing: { border: "2px solid #ff9800" },
