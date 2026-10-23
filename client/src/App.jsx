@@ -1,11 +1,12 @@
 import "react";
 import "./App.css";
-import PostApi from "./components/PostAPI";
+import CarBlogDashboard from "./components/PostAPI";
 
 function App() {
   return (
     <>
-      <PostApi />
+      {/* <PostApi /> */}
+      <CarBlogDashboard />
     </>
   );
 }
