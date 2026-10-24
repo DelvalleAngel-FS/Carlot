@@ -1,16 +1,25 @@
-# React + Vite
+# How To Run Client // Front-End
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+cd client
+run npm run dev
 
-Currently, two official plugins are available:
+# How To Run Server// Back-End
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+cd Server
+npm run dev
 
-## React Compiler
+# Front-End Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Code Breakdown
 
-## Expanding the ESLint configuration
+✳️api.js file contains the logic for the API to be broken down for the CRUD to be implmented. This files purpose is to only fetch exaclty what we need. In this file, we have the ability to get all, create/edit and delete.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+✳️CarForm.jsx is the form being created that is working with the api.js. Contains basic inline styling for the components in the field form.
+
+✳️CarBlogDashboard is a component built with the CarForm compnent and pulling data from the api. We started by setting our use states for several of our variables. We create a Form Field State with what our fields for the user will be to fill out. This component completes the API data structure by then finishing the fetch function with a .then and .catch method. We then create two functions that will have a form field with user to fill information, and a state where the field clears itself after a submit. The different fields also recieve a inline styling for the appearance.
+
+# Back-End Development
+
+## Code Breakdown
+
+✳️The Server is connected to client and is able to recieve any crud method to the database. Postman and mongo Compass display and work with client for any data to reflect on changes/updates, getall functions, and the capabilities to delete.
